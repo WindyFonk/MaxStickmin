@@ -18,6 +18,7 @@ public class GrabObject : MonoBehaviour
     private int layerIndex;
     public float speed;
     private Rigidbody2D objectRb;
+    private SpriteRenderer objectSprite;
     public bool isHolding;
     public float range;
 
@@ -25,7 +26,8 @@ public class GrabObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        layerIndex = LayerMask.NameToLayer("LaunchObjects");
+        layerIndex = LayerMask.NameToLayer("LaunchObject");
+        Debug.Log(layerIndex);
     }
 
     // Update is called once per frame
@@ -35,14 +37,15 @@ public class GrabObject : MonoBehaviour
         Debug.DrawRay(rayPoint.transform.position, Vector2.right, UnityEngine.Color.red);*/
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        Collider2D targetObject = Physics2D.OverlapCircle(mousePosition, 5, layerIndex,-1,1);
+
+
         //Pick up object
         if (Input.GetKeyDown(KeyCode.E) && !isHolding)
         {
-            Collider2D targetObject = Physics2D.OverlapPoint(mousePosition,7);
             if (targetObject)
             {
                 grabbedObject = targetObject.transform.gameObject;
-                Debug.Log("OnObject");
             }
             else
             {
@@ -50,8 +53,9 @@ public class GrabObject : MonoBehaviour
             }
 
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
+            objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
             objectRb.isKinematic = true;
-
+            objectSprite.color= UnityEngine.Color.red;
             grabbedObject.transform.SetParent(transform);
 
 
@@ -75,19 +79,25 @@ public class GrabObject : MonoBehaviour
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectRb.isKinematic = false;
 
+            objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
+            objectSprite.color = UnityEngine.Color.black;
+
             grabbedObject.transform.SetParent(null);
             grabbedObject = null;
-            isHolding= false;
+            isHolding = false;
         }
 
         //Launch object
         if (Input.GetMouseButtonDown(0) && grabbedObject)
         {
+            grabbedObject.tag = "LaunchObject";
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectRb.isKinematic = false;
+            objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
+            objectSprite.color = UnityEngine.Color.black;
 
             grabbedObject.transform.SetParent(null);
-            objectRb.AddForce((mousePosition- grabbedObject.transform.position)*speed*objectRb.mass*3);
+            objectRb.AddForce((mousePosition - grabbedObject.transform.position) * speed * objectRb.mass * 5);
 
             grabbedObject = null;
             isHolding = false;
@@ -131,4 +141,4 @@ public class GrabObject : MonoBehaviour
     }
 
 
-    }
+}

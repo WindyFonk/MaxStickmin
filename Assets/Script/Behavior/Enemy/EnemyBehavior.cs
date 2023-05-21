@@ -19,8 +19,9 @@ public class EnemyBehavior : MonoBehaviour
     public Rigidbody2D projectile;
     public GameObject barrel;
     private float timeBetweenShot;
-    private float startTimeBetweenShot;
+    public float startTimeBetweenShot;
     public bool isFacingRight;
+    public float range;
 
     private Rigidbody2D body;
     private Animator animator;
@@ -51,6 +52,8 @@ public class EnemyBehavior : MonoBehaviour
     void Update()
     {
 
+        shoot = Range();
+
         if (isAlive && isAiming)
         {
             Aim();
@@ -75,26 +78,16 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
-            health -= 55;
+            health -= 60;
+        };
+
+        if (collision.gameObject.CompareTag("LaunchObject"))
+        {
+            health -= 120;
         };
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            shoot = true;
-            isAiming = true;
-        };
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            shoot = false;
-        };
-    }
 
 
     private void Aim()
@@ -154,7 +147,7 @@ public class EnemyBehavior : MonoBehaviour
         if (timeBetweenShot <= 0)
         {
             Rigidbody2D p = Instantiate(projectile, barrel.transform.position, transform.rotation);
-            startTimeBetweenShot = NextFloat(2,6);
+            startTimeBetweenShot = NextFloat(1,3);
             timeBetweenShot = startTimeBetweenShot;
         }
         else
@@ -169,4 +162,17 @@ public class EnemyBehavior : MonoBehaviour
         double val = (random.NextDouble() * (max - min) + min);
         return (float)val;
     }
+
+    private bool Range()
+    {
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        Debug.Log(distance);
+        if (distance < range)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
 }

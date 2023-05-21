@@ -14,6 +14,13 @@ public class PlayerController : MonoBehaviour
     public GameObject ProjectilePrefab, playerArm;
     public Transform LaunchOffset;
 
+    //ability
+    public bool launchUnlocked;
+    public bool dodgeUnlocked;
+    public float energy;
+    public int health;
+    public int resource;
+
     //Look angle
     private Vector2 lookDirection;
 
@@ -25,9 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     private bool isFacingRight;
     private bool isDucking;
-    public float health;
     public bool canshoot;
-    private bool isInBulletTime;
 
 
     [SerializeField] BoxCollider2D boxCollider;
@@ -44,7 +49,6 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         isDucking = false;
         Time.timeScale = 1;
-        isInBulletTime = false;
         animator = GetComponent<Animator>();
     }
 
@@ -53,22 +57,25 @@ public class PlayerController : MonoBehaviour
     {
         Flip();
         Shoot();
+
+        if (health < 1)
+        {
+            Ragdoll();
+        }
+
         AnimationController();
     }
 
 
-
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Enemy")
         {
             isGrounded = true;
         }
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "Projectile")
         {
-            health-=55;
+            health-=1;
         }
 
     }
@@ -100,12 +107,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
 
-
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            animator.SetTrigger("Dodge");
-        }
 
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -154,37 +155,15 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 animator.SetTrigger("Jump");
-                rb.AddForce(new Vector2(0, jumpForce));
+                rb.AddForce(Vector2.up * jumpForce);
                 isGrounded = false;
-                doubleJump = !doubleJump;
             }
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                animator.SetTrigger("FrontDodge");
-            }
+            
         }
 
         animator.SetFloat("Health", health);
 
-        if (health < 1)
-        {
-            Ragdoll();
-        }
-
-        //Bullet time
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            isInBulletTime = !isInBulletTime;
-        }
-        if (isInBulletTime) 
-        {
-            Time.timeScale = 0.7f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+         
 
     }
 
@@ -193,7 +172,7 @@ public class PlayerController : MonoBehaviour
         //Get mouse direction
         lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - torso.transform.position;
 
-        Debug.Log(lookDirection);
+        //Debug.Log(lookDirection);
         //Flip character
         if (lookDirection.x > 0)
         {
@@ -261,5 +240,6 @@ public class PlayerController : MonoBehaviour
 
         boxCollider.enabled = false;
     }
+
 
 }

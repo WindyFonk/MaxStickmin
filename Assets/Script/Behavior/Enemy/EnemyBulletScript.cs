@@ -7,28 +7,24 @@ public class EnemyBulletScript : MonoBehaviour
     private Transform player;
     private Vector3 target;
     private Rigidbody2D rb;
-    public float speed=2;
+    private SpriteRenderer sprite;
+    public float speed = 2;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Torso").transform;
-        rb= GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
 
         target = player.transform.position;
         AimAtPlayer();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        target = player.transform.position;
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }      
+
+        sprite.enabled = false;
+        Destroy(gameObject, 0.1f);
     }
 
     private void AimAtPlayer()

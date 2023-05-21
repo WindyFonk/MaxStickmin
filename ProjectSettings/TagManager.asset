@@ -12,6 +12,8 @@ TagManager:
   - Deathzone
   - Gun
   - TakeDown
+  - Torso
+  - LaunchObject
   layers:
   - Default
   - TransparentFX
@@ -20,9 +22,9 @@ TagManager:
   - Water
   - UI
   - Grappable
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - LaunchObject
   - 
   - 
   - 
