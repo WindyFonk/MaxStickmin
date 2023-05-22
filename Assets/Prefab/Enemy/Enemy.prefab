@@ -363,6 +363,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9081237347299513837}
   - component: {fileID: 2041913814782388283}
+  - component: {fileID: 560337309}
+  - component: {fileID: 560337308}
   m_Layer: 8
   m_Name: Gun
   m_TagString: Enemy
@@ -438,6 +440,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &560337309
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677221219906049431}
+  m_BodyType: 0
+  m_Simulated: 0
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &560337308
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677221219906049431}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.29476503, y: 0.67028755}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 5.12}
+    newSize: {x: 5.12, y: 5.12}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.8443208, y: 1.0004812}
+  m_EdgeRadius: 0
 --- !u!1 &2224095147323246910
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,8 +1043,9 @@ MonoBehaviour:
   barrel: {fileID: 1016253791208815203}
   startTimeBetweenShot: 1.5
   isFacingRight: 0
-  range: 0
+  range: 50
   boxCollider: {fileID: 9044709175920045899}
+  gun: {fileID: 1677221219906049431}
   cirCollider: {fileID: 1312710163}
   colliders:
   - {fileID: 2095388799}
@@ -1043,6 +1093,7 @@ MonoBehaviour:
   - {fileID: 7309372789331673234}
   - {fileID: 5824597806294573476}
   - {fileID: 3718230380791981368}
+  gunshoot: {fileID: 8300000, guid: d1d9d3df7a95c3d49818f38ccd2cf158, type: 3}
 --- !u!61 &4176933212831892814
 BoxCollider2D:
   m_ObjectHideFlags: 0

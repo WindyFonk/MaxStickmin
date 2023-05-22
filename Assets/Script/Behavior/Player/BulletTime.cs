@@ -8,7 +8,9 @@ public class BulletTime : MonoBehaviour
 
     private bool isInBulletTime;
     private float time, countdown;
+
     [SerializeField] GameObject effect;
+    [SerializeField] AudioClip enter,exit;
     private PlayerController player;
     private void Start()
     {
@@ -25,30 +27,36 @@ public class BulletTime : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isInBulletTime = !isInBulletTime;
-        }
-        if (isInBulletTime)
-        {
-            Time.timeScale = 0.3f;
-            if (countdown <= 0)
+
+            if (isInBulletTime)
             {
-                time = 0.1f;
-                countdown = time;
-                player.energy -= 1;
+                AudioManager.instance.PlaySFX(enter);
+                Time.timeScale = 0.3f;
+
+                if (countdown <= 0)
+                {
+                    time = 0.1f;
+                    countdown = time;
+                    player.energy -= 1;
+                }
+                else
+                {
+                    countdown -= Time.deltaTime;
+                }
             }
             else
             {
-                countdown -= Time.deltaTime;
+                AudioManager.instance.PlaySFX(exit);
+                Time.timeScale = 1f;
+            }
+
+            if (player.energy <= 0)
+            {
+                isInBulletTime = false;
             }
         }
-        else
-        {
-            Time.timeScale = 1f;
-        }
 
-        if (player.energy<=0)
-        {
-            isInBulletTime= false;
-        }
+        
 
         effect.GetComponent<Animator>().SetBool("isInBulletTime", isInBulletTime);
     }

@@ -34,6 +34,13 @@ public class PlayerController : MonoBehaviour
     private bool isDucking;
     public bool canshoot;
 
+    //sfx
+    [SerializeField] AudioClip gunshoot;
+
+    private float time, countdown, Ecount;
+
+
+
 
     [SerializeField] BoxCollider2D boxCollider;
     [SerializeField] Transform torso;
@@ -212,6 +219,7 @@ public class PlayerController : MonoBehaviour
         //Shoot
         if (Input.GetMouseButtonDown(0) && canshoot)
         {
+            AudioManager.instance.PlaySFX(gunshoot);
             Instantiate(ProjectilePrefab, LaunchOffset.position, LaunchOffset.rotation);
         }
     }
@@ -240,6 +248,5 @@ public class PlayerController : MonoBehaviour
 
         boxCollider.enabled = false;
     }
-
 
 }

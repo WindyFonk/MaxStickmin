@@ -962,6 +962,7 @@ MonoBehaviour:
   animator: {fileID: 7522934063459239894}
   rb: {fileID: 7522934063459239891}
   canshoot: 1
+  gunshoot: {fileID: 8300000, guid: 4c0fdb1523e90c947af397511de243f7, type: 3}
   boxCollider: {fileID: 4432856958235926654}
   torso: {fileID: 7522934063541859905}
   colliders:
@@ -1028,6 +1029,8 @@ MonoBehaviour:
   rayPoint: {fileID: 8566412608097228673}
   rayDistance: 100
   player: {fileID: 7522934063459239892}
+  hold: []
+  launch: []
   speed: 70
   isHolding: 0
   range: 500
@@ -1043,6 +1046,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69f779db4b23b842a5a86706da1b06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effect: {fileID: 228877206058271136, guid: 58d9a47700f2d7b49bfcb762be35cd1b, type: 3}
+  enter: {fileID: 8300000, guid: 1fe9b1b0af1ae27479fdeec7c3aa7a63, type: 3}
+  exit: {fileID: 8300000, guid: a05870c8b5bfee8448c85ac93304c9f2, type: 3}
 --- !u!114 &2115855801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,6 +1062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 8236979718734969015, guid: 3b3deee6e48e3a34db801709f07f41d3, type: 3}
+  sound: []
 --- !u!1 &7522934063462065632
 GameObject:
   m_ObjectHideFlags: 0

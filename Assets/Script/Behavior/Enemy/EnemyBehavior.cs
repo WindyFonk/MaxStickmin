@@ -26,11 +26,16 @@ public class EnemyBehavior : MonoBehaviour
     private Rigidbody2D body;
     private Animator animator;
     [SerializeField] BoxCollider2D boxCollider;
+    [SerializeField] GameObject gun;
     [SerializeField] CircleCollider2D cirCollider;
     [SerializeField] private List<Collider2D> colliders;
     [SerializeField] private List<HingeJoint2D> hingeJoints;
     [SerializeField] private List<Rigidbody2D> rigidbodies;
     [SerializeField] private List<LimbSolver2D> solvers;
+
+    //sfx
+    [SerializeField] AudioClip gunshoot;
+
 
     public static class EnemyBehaviorStatic
     {
@@ -136,16 +141,19 @@ public class EnemyBehavior : MonoBehaviour
 
     private void DisableCollider()
     {
+        gun.GetComponent<Rigidbody2D>().simulated = true;
         boxCollider.enabled = false;
         cirCollider.enabled = false;
         body.simulated= false;
         animator.enabled= false;
+        gun.transform.SetParent(null);
     }
 
     private void Shoot()
     {
         if (timeBetweenShot <= 0)
         {
+            AudioManager.instance.PlaySFX(gunshoot);
             Rigidbody2D p = Instantiate(projectile, barrel.transform.position, transform.rotation);
             startTimeBetweenShot = NextFloat(1,3);
             timeBetweenShot = startTimeBetweenShot;

@@ -13,6 +13,9 @@ public class GrabObject : MonoBehaviour
     [SerializeField] private Transform rayPoint;
     [SerializeField] private float rayDistance;
     [SerializeField] private PlayerController player;
+    [SerializeField] AudioClip[] hold;
+    [SerializeField] AudioClip[] launch;
+
 
     private GameObject grabbedObject;
     private int layerIndex;
@@ -58,6 +61,8 @@ public class GrabObject : MonoBehaviour
             objectSprite.color= UnityEngine.Color.red;
             grabbedObject.transform.SetParent(transform);
 
+            AudioClip clip = hold[UnityEngine.Random.Range(0, hold.Length)];
+            AudioManager.instance.PlaySFX(clip);
 
             isHolding = true;
         }
@@ -101,6 +106,10 @@ public class GrabObject : MonoBehaviour
 
             grabbedObject = null;
             isHolding = false;
+
+
+            AudioClip clip = launch[UnityEngine.Random.Range(0, launch.Length)];
+            AudioManager.instance.PlaySFX(clip);
         }
 
 
