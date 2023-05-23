@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded, doubleJump;
     [SerializeField] float speed, jumpForce;
     public Animator animator;
-    private float horizontal,vertical;
-    [SerializeField] private Rigidbody2D rb;
+    private float horizontal, vertical;
+    private Rigidbody2D rb;
     private bool isFacingRight;
     private bool isDucking;
     public bool canshoot;
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
         isDucking = false;
         Time.timeScale = 1;
         animator = GetComponent<Animator>();
+        rb= GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -76,13 +77,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss")
         {
             isGrounded = true;
         }
-        if (collision.gameObject.tag == "Projectile")
+        if (collision.gameObject.tag == "Bullet")
         {
-            health-=1;
+            health -= 25;
+        }
+
+        if (collision.gameObject.tag == "Shield")
+        {
+            health -= 100;
         }
 
     }
@@ -157,20 +163,23 @@ public class PlayerController : MonoBehaviour
         {
             doubleJump = false;
         }
-        if (isGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
-            if (Input.GetButton("Jump"))
+            if (isGrounded || doubleJump)
             {
+                isGrounded = false;
+                animator.ResetTrigger("Jump");
                 animator.SetTrigger("Jump");
                 rb.AddForce(Vector2.up * jumpForce);
-                isGrounded = false;
+                doubleJump = !doubleJump;
             }
-            
         }
+
+
 
         animator.SetFloat("Health", health);
 
-         
+
 
     }
 
@@ -204,7 +213,7 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
 
-        
+
         //LaunchOffset.rotation = Quaternion.Euler(0, 0, lookAngle);
 
         //Arm rotate

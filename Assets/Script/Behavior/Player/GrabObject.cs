@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,6 +23,7 @@ public class GrabObject : MonoBehaviour
     public float speed;
     private Rigidbody2D objectRb;
     private SpriteRenderer objectSprite;
+    private BoxCollider2D objectCollider;
     public bool isHolding;
     public float range;
 
@@ -57,6 +59,7 @@ public class GrabObject : MonoBehaviour
 
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
+            objectCollider = grabbedObject.GetComponent<BoxCollider2D>();
             objectRb.isKinematic = true;
             objectSprite.color= UnityEngine.Color.red;
             grabbedObject.transform.SetParent(transform);
@@ -72,6 +75,9 @@ public class GrabObject : MonoBehaviour
             grabbedObject.transform.position = Vector2.MoveTowards(grabbedObject.transform.position,
         holdTransform.position, Time.deltaTime * speed);
             player.canshoot = false;
+            objectCollider.enabled = false;
+            objectRb.velocity = Vector3.zero;
+            objectRb.angularVelocity = 0;
         }
         else
         {
@@ -86,6 +92,10 @@ public class GrabObject : MonoBehaviour
 
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
             objectSprite.color = UnityEngine.Color.black;
+            objectCollider.enabled = true;
+
+            objectRb.angularVelocity = 1;
+            objectRb.gravityScale = 2;
 
             grabbedObject.transform.SetParent(null);
             grabbedObject = null;
@@ -100,6 +110,8 @@ public class GrabObject : MonoBehaviour
             objectRb.isKinematic = false;
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
             objectSprite.color = UnityEngine.Color.black;
+            objectCollider.enabled = true;
+
 
             grabbedObject.transform.SetParent(null);
             objectRb.AddForce((mousePosition - grabbedObject.transform.position) * speed * objectRb.mass * 5);

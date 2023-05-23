@@ -5,12 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TutorialLevel : MonoBehaviour
 {
-    [SerializeField] GameObject Loadingscreen;
     private Animator loadAnimator;
 
     private void Start()
     {
-        loadAnimator= Loadingscreen.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,11 +22,11 @@ public class TutorialLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        /*if (collision.gameObject.CompareTag("Player"))
         {
             loadAnimator.SetTrigger("Load");
             StartCoroutine(LoadLV1());
-        }
+        }*/
     }
 
 
