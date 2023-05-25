@@ -23,4 +23,5 @@ public class AudioManager : MonoBehaviour
     {
         effect.PlayOneShot(clip);
     }
+
 }

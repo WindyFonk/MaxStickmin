@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (health < 1)
         {
-            Ragdoll();
+            Die();
         }
     }
 
@@ -46,8 +46,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void Ragdoll()
     {
-        Invoke("DisableCollider", 0.5f);
-        DisableCollider();
         GetComponent<IKManager2D>().enabled = false;
         foreach (var col in colliders)
         {
@@ -65,14 +63,16 @@ public class EnemyHealth : MonoBehaviour
         }
         this.enabled = false;
         Destroy(gameObject, 30f);
+
+        boxCollider.enabled = false;
     }
 
-    private void DisableCollider()
+    private void Die()
     {
+        Ragdoll();
         GetComponent<Shoot>().enabled= false;
         GetComponent<Boss1>().enabled= false;
         gun.GetComponent<Rigidbody2D>().simulated = true;
-        boxCollider.enabled = false;
         body.simulated = false;
         animator.enabled = false;
         gun.transform.SetParent(null);

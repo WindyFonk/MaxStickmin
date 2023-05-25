@@ -37,6 +37,10 @@ public class EnemyBulletScript : MonoBehaviour
         Vector3 direction = target - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
 
+
+        float rotat = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rotat - 180);
+
     }
 
 

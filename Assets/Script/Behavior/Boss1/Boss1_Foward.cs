@@ -8,7 +8,6 @@ public class Boss1_Foward : StateMachineBehaviour
     Rigidbody2D rb;
     public float speed = 5f;
     public float range = 9f;
-    [SerializeField] private float _duration = 0.5f;
     Vector2 target;
     Vector2 newPos;
     private float distance;

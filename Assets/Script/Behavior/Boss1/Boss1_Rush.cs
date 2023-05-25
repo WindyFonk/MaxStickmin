@@ -9,16 +9,18 @@ public class Boss1_Rush : StateMachineBehaviour
     Rigidbody2D rb;
     public float speed = 20f;
     public float range = 5f;
-    [SerializeField] private float _duration = 0.5f;
     Vector2 target;
     Vector2 newPos;
     private float distance;
+    private AudioSource rushSound;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        rushSound = animator.GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
-
+        rushSound.enabled = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -43,6 +45,7 @@ public class Boss1_Rush : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("Rush",false);
+        rushSound.enabled = false;
     }
 
 

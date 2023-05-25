@@ -23,6 +23,12 @@ public class BulletTime : MonoBehaviour
 
     private void BulletTimeActive()
     {
+        if (player.energy <= 0)
+        {
+            isInBulletTime = false;
+            return;
+        }
+
         //Bullet time
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -50,10 +56,7 @@ public class BulletTime : MonoBehaviour
                 Time.timeScale = 1f;
             }
 
-            if (player.energy <= 0)
-            {
-                isInBulletTime = false;
-            }
+            
         }
 
         
