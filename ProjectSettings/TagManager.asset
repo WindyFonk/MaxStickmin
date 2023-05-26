@@ -17,6 +17,7 @@ TagManager:
   - CurrentButtons
   - Boss
   - Shield
+  - Cursor
   layers:
   - Default
   - TransparentFX

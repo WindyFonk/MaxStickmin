@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8236979718734969009}
   - component: {fileID: 8236979718734969014}
   - component: {fileID: 8236979718734969008}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DodgeEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

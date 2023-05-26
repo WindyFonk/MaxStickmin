@@ -32,15 +32,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool isFacingRight;
     private bool isDucking;
-    public bool canshoot;
+    public bool canshoot = false;
+    private float countdown;
 
     //sfx
     [SerializeField] AudioClip gunshoot;
-
-    private float time, countdown, Ecount;
-
-
-
 
     [SerializeField] BoxCollider2D boxCollider;
     [SerializeField] Transform torso;
@@ -48,6 +44,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private List<HingeJoint2D> hingeJoints;
     [SerializeField] private List<Rigidbody2D> rigidbodies;
     [SerializeField] private List<LimbSolver2D> solvers;
+
+    //UI
+    public HealthBar healthBar;
+    public EnergyBar energyBar;
 
 
 
@@ -64,12 +64,15 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Flip();
-        Shoot();
 
         if (health < 1)
         {
             Ragdoll();
         }
+
+        healthBar.setHealth(health);
+        energyBar.setHealth(energy);
+        EnergyRecover(1);
 
         AnimationController();
     }
@@ -81,25 +84,21 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
-        if (collision.gameObject.tag == "Bullet")
-        {
-            health -= 25;
-        }
-
-        if (collision.gameObject.tag == "Shield")
-        {
-            health -= 100;
-        }
+        
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "Deathzone")
+        if (collision.gameObject.tag == "Bullet")
         {
-            Time.timeScale = 0;
-            Destroy(gameObject);
+            health -= 1;
+        }
+
+        if (collision.gameObject.tag == "Shield")
+        {
+            health -= 100;
         }
 
     }
@@ -190,6 +189,11 @@ public class PlayerController : MonoBehaviour
 
         //Debug.Log(lookDirection);
         //Flip character
+
+
+        //Arm rotate
+        Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        playerArm.transform.position = new Vector2(mousepos.x, mousepos.y);
         if (lookDirection.x > 0)
         {
             Vector3 theScale = transform.localScale;
@@ -210,15 +214,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    /*private void Shoot()
     {
 
 
         //LaunchOffset.rotation = Quaternion.Euler(0, 0, lookAngle);
-
-        //Arm rotate
-        Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        playerArm.transform.position = new Vector2(mousepos.x, mousepos.y);
+        
 
         if (!canshoot)
         {
@@ -231,7 +232,7 @@ public class PlayerController : MonoBehaviour
             AudioManager.instance.PlaySFX(gunshoot);
             Instantiate(ProjectilePrefab, LaunchOffset.position, LaunchOffset.rotation);
         }
-    }
+    }*/
 
     private void Ragdoll()
     {
@@ -258,4 +259,21 @@ public class PlayerController : MonoBehaviour
         boxCollider.enabled = false;
     }
 
+    private void EnergyRecover(float time)
+    {
+        if (countdown <= 0)
+        {
+            countdown = time;
+            energy += 1;
+        }
+        else
+        {
+            countdown -= Time.deltaTime;
+        }
+
+        if (energy >= 100)
+        {
+            energy = 100;
+        }
+    }
 }

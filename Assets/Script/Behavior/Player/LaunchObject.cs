@@ -6,18 +6,20 @@ using static UnityEngine.GraphicsBuffer;
 
 public class LaunchObject : MonoBehaviour
 {
-    public float speed;
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnMouseOver()
     {
-        if (collision.gameObject.CompareTag("Projectile"))
-        {
-            transform.position = Vector2.MoveTowards(transform.position,
-            Camera.main.ScreenToWorldPoint(Input.mousePosition), Time.deltaTime * speed);
-        }
+        UnityEngine.Color tmp = gameObject.GetComponent<SpriteRenderer>().color;
+        tmp.a = 0.6f;
+        gameObject.GetComponent<SpriteRenderer>().color = tmp;
     }
 
+    private void OnMouseExit()
+    {
+        UnityEngine.Color tmp = gameObject.GetComponent<SpriteRenderer>().color;
+        tmp.a = 1f;
+        gameObject.GetComponent<SpriteRenderer>().color = tmp;
+    }
 
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class BulletTime : MonoBehaviour
 {
@@ -11,10 +12,11 @@ public class BulletTime : MonoBehaviour
 
     [SerializeField] GameObject effect;
     [SerializeField] AudioClip enter,exit;
-    private PlayerController player;
+    public PlayerController player;
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        time = 1;
+        countdown = time;
     }
     void Update()
     {
@@ -36,14 +38,14 @@ public class BulletTime : MonoBehaviour
 
             if (isInBulletTime)
             {
+                EnergyDecrease(0.5f);
                 AudioManager.instance.PlaySFX(enter);
                 Time.timeScale = 0.3f;
 
                 if (countdown <= 0)
                 {
-                    time = 0.1f;
                     countdown = time;
-                    player.energy -= 1;
+                    player.energy -= 15;
                 }
                 else
                 {
@@ -58,10 +60,20 @@ public class BulletTime : MonoBehaviour
 
             
         }
-
-        
-
         effect.GetComponent<Animator>().SetBool("isInBulletTime", isInBulletTime);
+    }
+
+    private void EnergyDecrease(float time)
+    {
+        if (countdown <= 0)
+        {
+            countdown = time;
+            player.energy -= 1;
+        }
+        else
+        {
+            countdown -= Time.deltaTime;
+        }
     }
 
 }

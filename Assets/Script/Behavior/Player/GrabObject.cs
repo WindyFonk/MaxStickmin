@@ -26,12 +26,11 @@ public class GrabObject : MonoBehaviour
     private BoxCollider2D objectCollider;
     public bool isHolding;
     public float range;
-
+    public LayerMask mask;
 
     // Start is called before the first frame update
     void Start()
     {
-        layerIndex = LayerMask.NameToLayer("LaunchObject");
         Debug.Log(layerIndex);
     }
 
@@ -42,8 +41,7 @@ public class GrabObject : MonoBehaviour
         Debug.DrawRay(rayPoint.transform.position, Vector2.right, UnityEngine.Color.red);*/
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Collider2D targetObject = Physics2D.OverlapCircle(mousePosition, 5, layerIndex,-1,1);
-
+        Collider2D targetObject = Physics2D.OverlapCircle(mousePosition, 5, mask, -1.8f,1);
 
         //Pick up object
         if (Input.GetKeyDown(KeyCode.E) && !isHolding)
@@ -60,7 +58,7 @@ public class GrabObject : MonoBehaviour
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
             objectCollider = grabbedObject.GetComponent<BoxCollider2D>();
-            objectRb.isKinematic = true;
+            objectRb.gravityScale = 0;
             objectSprite.color= UnityEngine.Color.red;
             grabbedObject.transform.SetParent(transform);
 
@@ -75,7 +73,6 @@ public class GrabObject : MonoBehaviour
             grabbedObject.transform.position = Vector2.MoveTowards(grabbedObject.transform.position,
         holdTransform.position, Time.deltaTime * speed);
             player.canshoot = false;
-            objectCollider.enabled = false;
             objectRb.velocity = Vector3.zero;
             objectRb.angularVelocity = 0;
         }
@@ -107,10 +104,12 @@ public class GrabObject : MonoBehaviour
         {
             grabbedObject.tag = "LaunchObject";
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
+            objectCollider.isTrigger = false;
             objectRb.isKinematic = false;
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
             objectSprite.color = UnityEngine.Color.black;
             objectCollider.enabled = true;
+            objectRb.gravityScale = 2;
 
 
             grabbedObject.transform.SetParent(null);

@@ -20,16 +20,12 @@ public class EnemyBulletScript : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        sprite.enabled = false;
-        Destroy(gameObject, 0.1f);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        sprite.enabled = false;
-        Destroy(gameObject, 0.1f);
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Ground"))
+        {
+            Destroy(gameObject, 0.1f);
+        }
     }
 
     private void AimAtPlayer()
