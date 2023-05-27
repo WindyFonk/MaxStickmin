@@ -24,7 +24,7 @@ public class Dodge : MonoBehaviour
 
     private void DodgeActive()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDodge)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDodge && player.energy>10)
         {
             animator.SetTrigger("Dodge");
             GameObject dodgeEffect = Instantiate(effect);

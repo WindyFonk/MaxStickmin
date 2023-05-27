@@ -27,7 +27,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (health < 1)
         {
-            Die();
+            animator.enabled = false;
+            Invoke("Die", 0.5f);
         }
     }
 
@@ -70,11 +71,10 @@ public class EnemyHealth : MonoBehaviour
     private void Die()
     {
         Ragdoll();
-        GetComponent<Shoot>().enabled= false;
-        GetComponent<Boss1>().enabled= false;
+        GetComponent<Shoot>().enabled = false;
+        GetComponent<Boss1>().enabled = false;
         gun.GetComponent<Rigidbody2D>().simulated = true;
         body.simulated = false;
-        animator.enabled = false;
         gun.transform.SetParent(null);
     }
 }

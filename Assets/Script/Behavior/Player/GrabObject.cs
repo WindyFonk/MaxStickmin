@@ -41,13 +41,14 @@ public class GrabObject : MonoBehaviour
         Debug.DrawRay(rayPoint.transform.position, Vector2.right, UnityEngine.Color.red);*/
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Collider2D targetObject = Physics2D.OverlapCircle(mousePosition, 5, mask, -1.8f,1);
+        Collider2D targetObject = Physics2D.OverlapCircle(mousePosition, 5, mask);
 
         //Pick up object
-        if (Input.GetKeyDown(KeyCode.E) && !isHolding)
+        if (Input.GetKeyDown(KeyCode.E) && !isHolding && player.energy>10)
         {
             if (targetObject)
             {
+                player.energy -= 5;
                 grabbedObject = targetObject.transform.gameObject;
             }
             else
@@ -75,6 +76,7 @@ public class GrabObject : MonoBehaviour
             player.canshoot = false;
             objectRb.velocity = Vector3.zero;
             objectRb.angularVelocity = 0;
+            objectCollider.enabled = false;
         }
         else
         {
@@ -84,6 +86,8 @@ public class GrabObject : MonoBehaviour
         //Drop object
         if (Input.GetKeyDown(KeyCode.F) && grabbedObject)
         {
+            player.energy += 3;
+
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectRb.isKinematic = false;
 
