@@ -28,7 +28,7 @@ public class LaunchObject : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Ground"))
         {
-            Invoke("ResetTag", 0.5f);
+            Invoke("ResetTag", 1f);
         }
         if (collision.gameObject.CompareTag("LaunchObject"))
         {

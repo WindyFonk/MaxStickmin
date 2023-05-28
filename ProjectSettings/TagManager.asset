@@ -11,13 +11,13 @@ TagManager:
   - Enemy
   - Deathzone
   - Gun
-  - TakeDown
   - Torso
   - LaunchObject
   - CurrentButtons
   - Boss
   - Shield
   - Cursor
+  - Card
   layers:
   - Default
   - TransparentFX

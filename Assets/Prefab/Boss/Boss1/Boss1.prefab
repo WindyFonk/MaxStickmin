@@ -858,7 +858,6 @@ GameObject:
   - component: {fileID: 9044709175873221430}
   - component: {fileID: 9044709175873221431}
   - component: {fileID: 9044709175873221437}
-  - component: {fileID: 9044709175873221442}
   - component: {fileID: 194537536}
   m_Layer: 11
   m_Name: Boss1
@@ -1015,67 +1014,6 @@ MonoBehaviour:
   barrel: {fileID: 236542346432969985}
   startTimeBetweenShot: 6
   gunshoot: {fileID: 8300000, guid: d1d9d3df7a95c3d49818f38ccd2cf158, type: 3}
---- !u!114 &9044709175873221442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2718613610335221911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c257e51640548f49a0760d70eb53b90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCollider: {fileID: 8131082420221012009}
-  gun: {fileID: 1879272778958574325}
-  colliders:
-  - {fileID: 959877443156008733}
-  - {fileID: 959877441589327266}
-  - {fileID: 959877443445812187}
-  - {fileID: 959877442716257380}
-  - {fileID: 959877442008768996}
-  - {fileID: 959877442170591594}
-  - {fileID: 959877442816350169}
-  - {fileID: 959877441541684265}
-  - {fileID: 959877442359936324}
-  - {fileID: 959877441980453544}
-  - {fileID: 959877442078375316}
-  - {fileID: 959877442457391533}
-  - {fileID: 959877442271685145}
-  hingeJoints:
-  - {fileID: 959877441589327264}
-  - {fileID: 959877443445812185}
-  - {fileID: 959877442716257386}
-  - {fileID: 959877442008769002}
-  - {fileID: 959877442170591592}
-  - {fileID: 959877442816350175}
-  - {fileID: 959877441541684271}
-  - {fileID: 959877442359936330}
-  - {fileID: 959877441980453550}
-  - {fileID: 959877442078375322}
-  - {fileID: 959877442457391539}
-  - {fileID: 959877442271685151}
-  rigidbodies:
-  - {fileID: 959877443156008930}
-  - {fileID: 959877441589327267}
-  - {fileID: 959877443445812184}
-  - {fileID: 959877442716257381}
-  - {fileID: 959877442008768997}
-  - {fileID: 959877442170591595}
-  - {fileID: 959877442816350174}
-  - {fileID: 959877441541684270}
-  - {fileID: 959877442359936325}
-  - {fileID: 959877441980453545}
-  - {fileID: 959877442078375317}
-  - {fileID: 959877442457391538}
-  - {fileID: 959877442271685150}
-  solvers:
-  - {fileID: 8513137914092154801}
-  - {fileID: 7503613400033331184}
-  - {fileID: 6739368195719259846}
-  - {fileID: 4524962752958538330}
-  health: 200
 --- !u!82 &194537536
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2698,7 +2636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14260af0aaec37e4c8439d68b0170aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bosshealth: {fileID: 9044709175873221442}
+  bosshealth: {fileID: 0}
   health: 20
 --- !u!1 &5450819011202171800
 GameObject:

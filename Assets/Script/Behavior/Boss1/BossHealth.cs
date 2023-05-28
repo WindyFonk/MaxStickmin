@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D.IK;
 
-public class EnemyHealth : MonoBehaviour
+public class BossHealth : MonoBehaviour
 {
     private Rigidbody2D body;
     private Animator animator;
@@ -28,8 +28,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (health < 1)
         {
-            Instantiate(card,transform.position, Quaternion.identity);
             Die();
+            Instantiate(card, transform.position, Quaternion.identity);
         }
     }
 
@@ -64,14 +64,14 @@ public class EnemyHealth : MonoBehaviour
             rb.simulated = true;
         }
         this.enabled = false;
-        Destroy(gameObject, 15f);
+        Destroy(gameObject, 30f);
+        animator.enabled = false;
+        boxCollider.enabled = false;
     }
 
     private void Die()
     {
         Ragdoll();
-        animator.enabled = false;
-        boxCollider.enabled = false;
         GetComponent<Shoot>().enabled = false;
         GetComponent<Boss1>().enabled = false;
         gun.GetComponent<Rigidbody2D>().simulated = true;

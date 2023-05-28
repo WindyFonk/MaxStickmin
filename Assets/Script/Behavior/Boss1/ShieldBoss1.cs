@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldBoss1 : MonoBehaviour
 {
-    public EnemyHealth bosshealth;
+    public BossHealth bosshealth;
     public float health = 20;
 
     private void Update()

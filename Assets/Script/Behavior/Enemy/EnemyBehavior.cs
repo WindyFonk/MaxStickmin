@@ -58,6 +58,7 @@ public class EnemyBehavior : MonoBehaviour
     {
 
         shoot = Range();
+        isAiming = Range();
 
         if (isAlive && isAiming)
         {

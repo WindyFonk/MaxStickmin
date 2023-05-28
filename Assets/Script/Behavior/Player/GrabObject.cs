@@ -60,8 +60,8 @@ public class GrabObject : MonoBehaviour
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
             objectCollider = grabbedObject.GetComponent<BoxCollider2D>();
             objectRb.gravityScale = 0;
-            objectSprite.color= UnityEngine.Color.red;
             grabbedObject.transform.SetParent(transform);
+            objectCollider.enabled = false;
 
             AudioClip clip = hold[UnityEngine.Random.Range(0, hold.Length)];
             AudioManager.instance.PlaySFX(clip);
@@ -76,7 +76,6 @@ public class GrabObject : MonoBehaviour
             player.canshoot = false;
             objectRb.velocity = Vector3.zero;
             objectRb.angularVelocity = 0;
-            objectCollider.enabled = false;
         }
         else
         {
@@ -111,7 +110,6 @@ public class GrabObject : MonoBehaviour
             objectCollider.isTrigger = false;
             objectRb.isKinematic = false;
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
-            objectSprite.color = UnityEngine.Color.black;
             objectCollider.enabled = true;
             objectRb.gravityScale = 2;
 
