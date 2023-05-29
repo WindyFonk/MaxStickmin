@@ -61,17 +61,16 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-     void Update()
+    void Update()
     {
         Flip();
-        Shoot();
 
         if (health < 1)
         {
             Ragdoll();
         }
 
-        //healthBar.setHealth(health);
+        healthBar.setHealth(health);
         energyBar.setHealth(energy);
         EnergyRecover(1);
 
@@ -215,7 +214,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    /*private void Shoot()
     {
 
 
@@ -233,7 +232,7 @@ public class PlayerController : MonoBehaviour
             AudioManager.instance.PlaySFX(gunshoot);
             Instantiate(ProjectilePrefab, LaunchOffset.position, LaunchOffset.rotation);
         }
-    }
+    }*/
 
     private void Ragdoll()
     {
