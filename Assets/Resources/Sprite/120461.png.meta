@@ -221,6 +221,30 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+<<<<<<< HEAD
+=======
+    - serializedVersion: 2
+      name: 120461_5
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 566
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a8fbc196e44ef447b8cc777950ad3cc
+      internalID: -2038449115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+>>>>>>> parent of f070539 (nh)
     outline: []
     physicsShape: []
     bones: []
@@ -236,6 +260,10 @@ TextureImporter:
       120461_4: -306705352
       120461_0: 820724388
       120461_1: -906770287
+<<<<<<< HEAD
+=======
+      120461_5: -2038449115
+>>>>>>> parent of f070539 (nh)
       120461_2: 2140253232
   spritePackingTag: 
   pSDRemoveMatte: 0
