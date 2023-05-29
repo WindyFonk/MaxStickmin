@@ -8,10 +8,17 @@ public class MenuManager : MonoBehaviour
 
     public GameObject LevelButtons;
     public GameObject MenuButtons;
+    public GameObject OptionButtons;
     public void PlayGame()
     {
         MenuButtons.SetActive(false);
         LevelButtons.SetActive(true);
+    }
+
+    public void Option()
+    {
+        MenuButtons.SetActive(false);
+        OptionButtons.SetActive(true);
     }
 
     public void Back()

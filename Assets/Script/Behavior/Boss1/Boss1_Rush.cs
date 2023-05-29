@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Boss1_Rush : StateMachineBehaviour
 {
     Transform player;
     Rigidbody2D rb;
-    public float speed = 20f;
+    public float speed = 35f;
     public float range = 5f;
     Vector2 target;
     Vector2 newPos;

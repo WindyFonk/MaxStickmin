@@ -6,29 +6,36 @@ using static UnityEngine.GraphicsBuffer;
 
 public class LaunchObject : MonoBehaviour
 {
-    private void OnMouseEnter()
+    private string startTag;
+    private void Start()
     {
-        UnityEngine.Color tmp = gameObject.GetComponent<SpriteRenderer>().color;
-        tmp.a = 0.3f;
-        gameObject.GetComponent<SpriteRenderer>().color = tmp;
+        startTag = gameObject.tag;
     }
-    private void OnMouseOver()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Cursor"))
+        {
+            UnityEngine.Color tmp = gameObject.GetComponent<SpriteRenderer>().color;
+            tmp.a = 0.3f;
+            gameObject.GetComponent<SpriteRenderer>().color = tmp;
+        }
     }
 
-    private void OnMouseExit()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        UnityEngine.Color tmp = gameObject.GetComponent<SpriteRenderer>().color;
-        tmp.a = 1f;
-        gameObject.GetComponent<SpriteRenderer>().color = tmp;
+        if (collision.gameObject.CompareTag("Cursor"))
+        {
+            UnityEngine.Color tmp = gameObject.GetComponent<SpriteRenderer>().color;
+            tmp.a = 1f;
+            gameObject.GetComponent<SpriteRenderer>().color = tmp;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Ground"))
         {
-            Invoke("ResetTag", 1f);
+            Invoke("ResetTag", 0);
         }
         if (collision.gameObject.CompareTag("LaunchObject"))
         {
@@ -38,7 +45,7 @@ public class LaunchObject : MonoBehaviour
 
     private void ResetTag()
     {
-        gameObject.tag = "Ground";
+        gameObject.tag = startTag;
     }
 
 

@@ -8,6 +8,8 @@ public class BossHealth : MonoBehaviour
     private Rigidbody2D body;
     private Animator animator;
     [SerializeField] BoxCollider2D boxCollider;
+    [SerializeField] CapsuleCollider2D capCollider;
+    [SerializeField] CircleCollider2D cirCollider;
     [SerializeField] GameObject gun;
     [SerializeField] GameObject card;
     [SerializeField] private List<Collider2D> colliders;
@@ -28,8 +30,11 @@ public class BossHealth : MonoBehaviour
     {
         if (health < 1)
         {
-            Die();
-            Instantiate(card, transform.position, Quaternion.identity);
+            animator.enabled = false;
+
+            Invoke("Ragdoll", 0.6f);
+            Instantiate(card,transform.transform.position, Quaternion.identity);
+            this.enabled = false;
         }
     }
 
@@ -42,12 +47,13 @@ public class BossHealth : MonoBehaviour
 
         if (collision.gameObject.CompareTag("LaunchObject"))
         {
-            health -= 120;
+            health -= 100;
         };
     }
 
     private void Ragdoll()
     {
+        Die();
         GetComponent<IKManager2D>().enabled = false;
         foreach (var col in colliders)
         {
@@ -65,17 +71,18 @@ public class BossHealth : MonoBehaviour
         }
         this.enabled = false;
         Destroy(gameObject, 30f);
-        animator.enabled = false;
-        boxCollider.enabled = false;
+        Destroy(gameObject, 15f);
     }
 
     private void Die()
     {
-        Ragdoll();
         GetComponent<Shoot>().enabled = false;
         GetComponent<Boss1>().enabled = false;
         gun.GetComponent<Rigidbody2D>().simulated = true;
+        boxCollider.enabled = false;
+        cirCollider.enabled = false;
         body.simulated = false;
         gun.transform.SetParent(null);
+        gameObject.GetComponent<AudioSource>().Stop();
     }
 }

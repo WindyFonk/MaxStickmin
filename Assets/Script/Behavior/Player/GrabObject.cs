@@ -85,13 +85,13 @@ public class GrabObject : MonoBehaviour
         //Drop object
         if (Input.GetKeyDown(KeyCode.F) && grabbedObject)
         {
+            grabbedObject.tag = "LaunchObject";
             player.energy += 3;
 
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectRb.isKinematic = false;
 
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
-            objectSprite.color = UnityEngine.Color.black;
             objectCollider.enabled = true;
 
             objectRb.angularVelocity = 1;
