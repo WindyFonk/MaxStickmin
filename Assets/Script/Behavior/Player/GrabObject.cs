@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -28,6 +29,8 @@ public class GrabObject : MonoBehaviour
     public float range;
     public LayerMask mask;
 
+    public float rollSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +44,7 @@ public class GrabObject : MonoBehaviour
         Debug.DrawRay(rayPoint.transform.position, Vector2.right, UnityEngine.Color.red);*/
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Collider2D targetObject = Physics2D.OverlapCircle(mousePosition, 5, mask);
+        Collider2D targetObject = Physics2D.OverlapCircle(mousePosition, 3, mask);
 
         //Pick up object
         if (Input.GetKeyDown(KeyCode.E) && !isHolding && player.energy>10)
@@ -76,6 +79,16 @@ public class GrabObject : MonoBehaviour
             player.canshoot = false;
             objectRb.velocity = Vector3.zero;
             objectRb.angularVelocity = 0;
+
+            //Rotate Holding Object
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
+                grabbedObject.transform.Rotate(new Vector3(0,0,1) * rollSpeed, Space.Self);
+            }
+            if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
+                grabbedObject.transform.Rotate(new Vector3(0, 0, -1) * rollSpeed, Space.Self);
+            }
         }
         else
         {

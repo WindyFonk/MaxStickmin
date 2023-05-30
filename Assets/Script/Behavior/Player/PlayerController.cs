@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
     public EnergyBar energyBar;
 
+    [SerializeField] GameObject cursor;
+
+
 
 
     void Start()
@@ -64,14 +67,16 @@ public class PlayerController : MonoBehaviour
      void Update()
     {
         Flip();
-        Shoot();
+       // Shoot();
 
         if (health < 1)
         {
             Ragdoll();
+            energy -= 100;
+            Die();
         }
 
-        //healthBar.setHealth(health);
+        healthBar.setHealth(health);
         energyBar.setHealth(energy);
         EnergyRecover(1);
 
@@ -165,10 +170,10 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump"))
         {
+            animator.ResetTrigger("Jump");
             if (isGrounded || doubleJump)
             {
                 isGrounded = false;
-                animator.ResetTrigger("Jump");
                 animator.SetTrigger("Jump");
                 rb.AddForce(Vector2.up * jumpForce);
                 doubleJump = !doubleJump;
@@ -276,5 +281,11 @@ public class PlayerController : MonoBehaviour
         {
             energy = 100;
         }
+    }
+
+    private void Die()
+    {
+        Time.timeScale = 0.2f;
+        cursor.SetActive(false);
     }
 }

@@ -7,6 +7,7 @@ using static UnityEngine.ParticleSystem;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    public bool onCover;
     [SerializeField] float speed;
     public float health;
     public GameObject Arm;
@@ -78,6 +79,8 @@ public class EnemyBehavior : MonoBehaviour
         {
             isAlive = false;
         }
+
+        animator.SetBool("onCover", onCover);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class TutorialLevel : MonoBehaviour
 {
-    private Animator loadAnimator;
+    public int level;
+    public GameObject loadScreen;
+    private Animator animatorLoad;
 
     private void Start()
     {
+        loadScreen.SetActive(true);
+        animatorLoad = loadScreen.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -22,11 +26,11 @@ public class TutorialLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            loadAnimator.SetTrigger("Load");
-            StartCoroutine(LoadLV1());
-        }*/
+            animatorLoad.SetTrigger("Load");
+            StartCoroutine(LoadNextLevel(2));
+        }
     }
 
 
@@ -36,9 +40,9 @@ public class TutorialLevel : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
-    IEnumerator LoadLV1()
+    IEnumerator LoadNextLevel(int level)
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(level);
     }
 }
