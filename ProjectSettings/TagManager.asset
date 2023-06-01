@@ -18,6 +18,7 @@ TagManager:
   - Shield
   - Cursor
   - Card
+  - Key1
   layers:
   - Default
   - TransparentFX

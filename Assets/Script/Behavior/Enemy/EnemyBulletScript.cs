@@ -29,6 +29,15 @@ public class EnemyBulletScript : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Ground") ||
+            collision.gameObject.CompareTag("LaunchObject") || collision.gameObject.CompareTag("Boss"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void AimAtPlayer()
     {
         Vector3 direction = target - transform.position;

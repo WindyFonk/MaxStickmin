@@ -36,6 +36,7 @@ public class EnemyBehavior : MonoBehaviour
 
     //sfx
     [SerializeField] AudioClip gunshoot;
+    [SerializeField] AudioClip[] hit;
 
 
     public static class EnemyBehaviorStatic
@@ -57,15 +58,13 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        shoot = Range();
         isAiming = Range();
 
         if (isAlive && isAiming)
         {
             Aim();
 
-            if (shoot)
+            if (Range())
             {
                 Shoot();
             }
@@ -93,6 +92,8 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("LaunchObject"))
         {
             health -= 120;
+            AudioClip clip = hit[UnityEngine.Random.Range(0, hit.Length)];
+            AudioManager.instance.PlaySFX(clip);
         };
     }
 

@@ -1029,6 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235d3a8631bec7e449debead6029ef53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onCover: 0
   speed: 0
   health: 100
   Arm: {fileID: 6726719048800082256}
@@ -1089,6 +1090,10 @@ MonoBehaviour:
   - {fileID: 5824597806294573476}
   - {fileID: 3718230380791981368}
   gunshoot: {fileID: 8300000, guid: d1d9d3df7a95c3d49818f38ccd2cf158, type: 3}
+  hit:
+  - {fileID: 8300000, guid: 4b76ecaa0e9178b42bdfeb7f80e67b7b, type: 3}
+  - {fileID: 8300000, guid: d859b622b277a974d88b9a836d4fd41e, type: 3}
+  - {fileID: 8300000, guid: 0fefe73a33a167741bdbbdcab853db8d, type: 3}
 --- !u!61 &4176933212831892814
 BoxCollider2D:
   m_ObjectHideFlags: 0

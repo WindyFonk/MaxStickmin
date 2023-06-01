@@ -21,6 +21,11 @@ public class MenuManager : MonoBehaviour
         OptionButtons.SetActive(true);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     public void Back()
     {
         GameObject current = GameObject.FindGameObjectWithTag("CurrentButtons");

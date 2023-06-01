@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     //sfx
     [SerializeField] AudioClip gunshoot;
+    [SerializeField] AudioClip death;
 
     [SerializeField] BoxCollider2D boxCollider;
     [SerializeField] Transform torso;
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour
     public EnergyBar energyBar;
 
     [SerializeField] GameObject cursor;
+    [SerializeField] GameObject gameOver;
+    [SerializeField] GameObject UI;
 
 
 
@@ -73,7 +76,7 @@ public class PlayerController : MonoBehaviour
         {
             Ragdoll();
             energy -= 100;
-            Die();
+            StartCoroutine(Die());  
         }
 
         healthBar.setHealth(health);
@@ -283,9 +286,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Die()
+    IEnumerator Die()
     {
-        Time.timeScale = 0.2f;
+        AudioManager.instance.PlaySFX(death);
+        Time.timeScale = 0.3f;
         cursor.SetActive(false);
+        yield return new WaitForSeconds(1);
+        Time.timeScale = 1f;
+        UI.SetActive(false);
+        gameOver.SetActive(true);
+        yield return new WaitForSeconds(2);
+        Time.timeScale = 0;
+
+
     }
 }

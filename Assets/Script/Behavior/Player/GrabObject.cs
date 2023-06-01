@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -24,7 +23,7 @@ public class GrabObject : MonoBehaviour
     public float speed;
     private Rigidbody2D objectRb;
     private SpriteRenderer objectSprite;
-    private BoxCollider2D objectCollider;
+    private Collider2D objectCollider;
     public bool isHolding;
     public float range;
     public LayerMask mask;
@@ -61,7 +60,7 @@ public class GrabObject : MonoBehaviour
 
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
-            objectCollider = grabbedObject.GetComponent<BoxCollider2D>();
+            objectCollider = grabbedObject.GetComponent<Collider2D>();
             objectRb.gravityScale = 0;
             grabbedObject.transform.SetParent(transform);
             objectCollider.enabled = false;
@@ -98,7 +97,6 @@ public class GrabObject : MonoBehaviour
         //Drop object
         if (Input.GetKeyDown(KeyCode.F) && grabbedObject)
         {
-            grabbedObject.tag = "LaunchObject";
             player.energy += 3;
 
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();

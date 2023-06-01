@@ -29,7 +29,7 @@ public class TutorialLevel : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             animatorLoad.SetTrigger("Load");
-            StartCoroutine(LoadNextLevel(2));
+            StartCoroutine(LoadNextLevel(level));
         }
     }
 
