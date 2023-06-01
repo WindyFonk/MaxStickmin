@@ -9,6 +9,11 @@ public class MenuManager : MonoBehaviour
     public GameObject LevelButtons;
     public GameObject MenuButtons;
     public GameObject OptionButtons;
+
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
     public void PlayGame()
     {
         MenuButtons.SetActive(false);

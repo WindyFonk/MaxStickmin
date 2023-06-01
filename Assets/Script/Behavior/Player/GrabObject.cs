@@ -28,8 +28,8 @@ public class GrabObject : MonoBehaviour
     public float range;
     public LayerMask mask;
     private float ogGravity;
-
     public float rollSpeed;
+    public string ogTag;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +58,7 @@ public class GrabObject : MonoBehaviour
             {
                 return;
             }
-
+            ogTag = grabbedObject.tag;
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
             objectCollider = grabbedObject.GetComponent<Collider2D>();
@@ -99,6 +99,7 @@ public class GrabObject : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && grabbedObject)
         {
             player.energy += 3;
+            grabbedObject.tag = ogTag;
 
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectRb.isKinematic = false;

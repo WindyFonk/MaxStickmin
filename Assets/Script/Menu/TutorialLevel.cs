@@ -28,7 +28,6 @@ public class TutorialLevel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            animatorLoad.SetTrigger("Load");
             StartCoroutine(LoadNextLevel(level));
         }
     }
@@ -42,7 +41,13 @@ public class TutorialLevel : MonoBehaviour
 
     IEnumerator LoadNextLevel(int level)
     {
+        animatorLoad.SetTrigger("Load");
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(level);
+    }
+
+    public void PlayGame()
+    {
+        StartCoroutine(LoadNextLevel(level));
     }
 }
