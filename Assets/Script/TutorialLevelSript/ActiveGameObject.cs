@@ -10,6 +10,7 @@ public class ActiveGameObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _object.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }

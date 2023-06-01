@@ -32,7 +32,7 @@ public class BossHealth : MonoBehaviour
         {
             animator.enabled = false;
 
-            Invoke("Ragdoll", 0.6f);
+            Ragdoll();
             Instantiate(card,transform.transform.position, Quaternion.identity);
             this.enabled = false;
         }
@@ -70,7 +70,6 @@ public class BossHealth : MonoBehaviour
             rb.simulated = true;
         }
         this.enabled = false;
-        Destroy(gameObject, 30f);
         Destroy(gameObject, 15f);
     }
 

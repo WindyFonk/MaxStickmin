@@ -27,6 +27,7 @@ public class GrabObject : MonoBehaviour
     public bool isHolding;
     public float range;
     public LayerMask mask;
+    private float ogGravity;
 
     public float rollSpeed;
 
@@ -61,6 +62,7 @@ public class GrabObject : MonoBehaviour
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
             objectCollider = grabbedObject.GetComponent<Collider2D>();
+            ogGravity = objectRb.gravityScale;
             objectRb.gravityScale = 0;
             grabbedObject.transform.SetParent(transform);
             objectCollider.enabled = false;
@@ -77,7 +79,6 @@ public class GrabObject : MonoBehaviour
         holdTransform.position, Time.deltaTime * speed);
             player.canshoot = false;
             objectRb.velocity = Vector3.zero;
-            objectRb.angularVelocity = 0;
 
             //Rotate Holding Object
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
@@ -106,7 +107,7 @@ public class GrabObject : MonoBehaviour
             objectCollider.enabled = true;
 
             objectRb.angularVelocity = 1;
-            objectRb.gravityScale = 2;
+            objectRb.gravityScale = ogGravity;
 
             grabbedObject.transform.SetParent(null);
             grabbedObject = null;
@@ -122,7 +123,7 @@ public class GrabObject : MonoBehaviour
             objectRb.isKinematic = false;
             objectSprite = grabbedObject.GetComponent<SpriteRenderer>();
             objectCollider.enabled = true;
-            objectRb.gravityScale = 2;
+            objectRb.gravityScale = ogGravity;
 
 
             grabbedObject.transform.SetParent(null);

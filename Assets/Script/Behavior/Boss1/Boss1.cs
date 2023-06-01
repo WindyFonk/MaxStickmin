@@ -25,6 +25,13 @@ public class Boss1 : MonoBehaviour
         animator.SetBool("shieldOn", shieldOn);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("LaunchObject"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
     private void FacePlayer()
     {
         lookDirection = player.position - transform.position;
