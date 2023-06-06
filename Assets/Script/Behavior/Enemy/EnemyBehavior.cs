@@ -8,6 +8,7 @@ using static UnityEngine.ParticleSystem;
 public class EnemyBehavior : MonoBehaviour
 {
     public bool onCover;
+    public bool canShoot = true;
     [SerializeField] float speed;
     public float health;
     public GameObject Arm;
@@ -64,7 +65,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             Aim();
 
-            if (Range())
+            if (Range() && canShoot)
             {
                 Shoot();
             }

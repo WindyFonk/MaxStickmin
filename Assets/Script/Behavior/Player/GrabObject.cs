@@ -27,6 +27,7 @@ public class GrabObject : MonoBehaviour
     public bool isHolding;
     public float range;
     public LayerMask mask;
+    public LayerMask grabmask;
     private float ogGravity;
     public float rollSpeed;
     public string ogTag;
@@ -47,7 +48,7 @@ public class GrabObject : MonoBehaviour
         Collider2D targetObject = Physics2D.OverlapCircle(mousePosition, 3, mask);
 
         //Pick up object
-        if (Input.GetKeyDown(KeyCode.E) && !isHolding && player.energy>10)
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1)) && !isHolding && player.energy>10)
         {
             if (targetObject)
             {
@@ -65,7 +66,7 @@ public class GrabObject : MonoBehaviour
             ogGravity = objectRb.gravityScale;
             objectRb.gravityScale = 0;
             grabbedObject.transform.SetParent(transform);
-            objectCollider.enabled = false;
+           // objectCollider.enabled = false;
 
             AudioClip clip = hold[UnityEngine.Random.Range(0, hold.Length)];
             AudioManager.instance.PlaySFX(clip);
@@ -73,10 +74,13 @@ public class GrabObject : MonoBehaviour
             isHolding = true;
         }
 
-        if (isHolding)
+        if (isHolding && grabbedObject)
         {
             grabbedObject.transform.position = Vector2.MoveTowards(grabbedObject.transform.position,
         holdTransform.position, Time.deltaTime * speed);
+            grabbedObject.layer = LayerMask.NameToLayer("GrabbedObject");
+            //objectRb.MovePosition(holdTransform.position);
+
             player.canshoot = false;
             objectRb.velocity = Vector3.zero;
 
@@ -98,6 +102,8 @@ public class GrabObject : MonoBehaviour
         //Drop object
         if (Input.GetKeyDown(KeyCode.F) && grabbedObject)
         {
+            grabbedObject.layer = LayerMask.NameToLayer("LaunchObject");
+
             player.energy += 3;
             grabbedObject.tag = ogTag;
 
@@ -118,6 +124,7 @@ public class GrabObject : MonoBehaviour
         //Launch object
         if (Input.GetMouseButtonDown(0) && grabbedObject)
         {
+            grabbedObject.layer = LayerMask.NameToLayer("LaunchObject");
             grabbedObject.tag = "LaunchObject";
             objectRb = grabbedObject.GetComponent<Rigidbody2D>();
             objectCollider.isTrigger = false;
@@ -136,6 +143,13 @@ public class GrabObject : MonoBehaviour
 
             AudioClip clip = launch[UnityEngine.Random.Range(0, launch.Length)];
             AudioManager.instance.PlaySFX(clip);
+        }
+
+
+        if (grabbedObject == null)
+        {
+            isHolding = false;
+            return;
         }
 
 

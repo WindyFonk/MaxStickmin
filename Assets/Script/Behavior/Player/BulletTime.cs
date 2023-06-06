@@ -7,7 +7,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class BulletTime : MonoBehaviour
 {
 
-    private bool isInBulletTime;
+    public bool isInBulletTime;
     private float time, countdown;
 
     [SerializeField] GameObject effect;

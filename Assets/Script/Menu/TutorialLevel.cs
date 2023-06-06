@@ -7,6 +7,7 @@ public class TutorialLevel : MonoBehaviour
 {
     public int level;
     public GameObject loadScreen;
+    public GameObject UI;
     private Animator animatorLoad;
 
     private void Start()
@@ -21,6 +22,11 @@ public class TutorialLevel : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) 
         {
             Reload();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            StartCoroutine(LoadNextLevel(0));
         }
     }
 
@@ -41,8 +47,9 @@ public class TutorialLevel : MonoBehaviour
 
     IEnumerator LoadNextLevel(int level)
     {
+        UI.SetActive(false);
         animatorLoad.SetTrigger("Load");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(level);
     }
 

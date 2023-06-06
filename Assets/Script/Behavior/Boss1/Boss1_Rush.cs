@@ -25,8 +25,8 @@ public class Boss1_Rush : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        target = new Vector2(player.position.x, player.position.y);
-        newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+        target = new Vector2(player.position.x, rb.position.y);
+        newPos = Vector2.MoveTowards(rb.position, target, speed * Time.deltaTime);
         distance = Mathf.Abs( newPos.x - target.x);
 
         

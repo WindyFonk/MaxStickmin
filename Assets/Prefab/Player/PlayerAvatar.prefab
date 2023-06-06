@@ -905,7 +905,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 5
@@ -952,15 +952,16 @@ MonoBehaviour:
   launchUnlocked: 0
   dodgeUnlocked: 0
   energy: 0
-  health: 8000
+  health: 4
   resource: 0
   isGrounded: 0
   doubleJump: 0
   speed: 20
-  jumpForce: 1400
+  jumpForce: 150
   animator: {fileID: 7522934063459239894}
   canshoot: 1
   gunshoot: {fileID: 8300000, guid: 4c0fdb1523e90c947af397511de243f7, type: 3}
+  death: {fileID: 0}
   boxCollider: {fileID: 4432856958235926654}
   torso: {fileID: 7522934063541859905}
   colliders:
@@ -1013,6 +1014,9 @@ MonoBehaviour:
   - {fileID: 7522934064773738644}
   healthBar: {fileID: 0}
   energyBar: {fileID: 0}
+  cursor: {fileID: 0}
+  gameOver: {fileID: 0}
+  UI: {fileID: 0}
 --- !u!114 &1629542239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,6 +1041,11 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 0
+  grabmask:
+    serializedVersion: 2
+    m_Bits: 0
+  rollSpeed: 0
+  ogTag: 
 --- !u!114 &2115855800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,6 +1058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69f779db4b23b842a5a86706da1b06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInBulletTime: 0
   effect: {fileID: 228877206058271136, guid: 58d9a47700f2d7b49bfcb762be35cd1b, type: 3}
   enter: {fileID: 8300000, guid: 1fe9b1b0af1ae27479fdeec7c3aa7a63, type: 3}
   exit: {fileID: 8300000, guid: a05870c8b5bfee8448c85ac93304c9f2, type: 3}

@@ -84,33 +84,25 @@ public class PlayerController : MonoBehaviour
         EnergyRecover(1);
 
         AnimationController();
+
+        Debug.Log(rb.velocity.y);
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Lock")
         {
             isGrounded = true;
         }
-        
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
-        if (collision.gameObject.tag == "Bullet")
-        {
-            health -= 1;
-        }
-
         if (collision.gameObject.tag == "Shield")
         {
             health -= 100;
         }
 
     }
+
+    
 
     private void AnimationController()
     {
@@ -173,18 +165,19 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump"))
         {
-            animator.ResetTrigger("Jump");
+            //animator.ResetTrigger("Jump");
             if (isGrounded || doubleJump)
             {
+                isGrounded = true;
                 isGrounded = false;
-                animator.SetTrigger("Jump");
-                rb.AddForce(Vector2.up * jumpForce);
+                //animator.SetTrigger("Jump");
+                //rb.AddForce(Vector2.up * jumpForce);
+                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                 doubleJump = !doubleJump;
             }
         }
 
-
-
+        animator.SetBool("Jump",!isGrounded);
         animator.SetFloat("Health", health);
 
 

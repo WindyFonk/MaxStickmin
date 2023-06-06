@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
-    public MultipleLock lock1, lock2;
+    public MultipleLock lock1;
     private Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class Gate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lock1.unlocked || lock2.unlocked)
+        if (lock1.unlocked)
         {
             animator.SetTrigger("Unlock");
         }

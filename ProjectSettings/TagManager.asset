@@ -19,6 +19,8 @@ TagManager:
   - Cursor
   - Card
   - Key1
+  - Lock
+  - Floatplatform
   layers:
   - Default
   - TransparentFX
@@ -33,7 +35,7 @@ TagManager:
   - Shield
   - Boss
   - PlayerBullet
-  - 
+  - GrabbedObject
   - 
   - 
   - 

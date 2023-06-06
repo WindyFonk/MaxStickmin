@@ -392,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   loadScreen: {fileID: 199218724}
+  UI: {fileID: 427776736}
 --- !u!4 &143644690
 Transform:
   m_ObjectHideFlags: 0
