@@ -66,7 +66,9 @@ public class GrabObject : MonoBehaviour
             ogGravity = objectRb.gravityScale;
             objectRb.gravityScale = 0;
             grabbedObject.transform.SetParent(transform);
-           // objectCollider.enabled = false;
+
+            grabbedObject.layer = LayerMask.NameToLayer("GrabbedObject");
+            // objectCollider.enabled = false;
 
             AudioClip clip = hold[UnityEngine.Random.Range(0, hold.Length)];
             AudioManager.instance.PlaySFX(clip);
@@ -78,7 +80,6 @@ public class GrabObject : MonoBehaviour
         {
             grabbedObject.transform.position = Vector2.MoveTowards(grabbedObject.transform.position,
         holdTransform.position, Time.deltaTime * speed);
-            grabbedObject.layer = LayerMask.NameToLayer("GrabbedObject");
             //objectRb.MovePosition(holdTransform.position);
 
             player.canshoot = false;

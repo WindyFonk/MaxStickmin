@@ -21,6 +21,7 @@ TagManager:
   - Key1
   - Lock
   - Floatplatform
+  - Corpse
   layers:
   - Default
   - TransparentFX

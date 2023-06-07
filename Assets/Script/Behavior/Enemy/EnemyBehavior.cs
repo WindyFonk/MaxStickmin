@@ -29,7 +29,6 @@ public class EnemyBehavior : MonoBehaviour
     private Animator animator;
     [SerializeField] BoxCollider2D boxCollider;
     [SerializeField] GameObject gun;
-    [SerializeField] CircleCollider2D cirCollider;
     [SerializeField] private List<Collider2D> colliders;
     [SerializeField] private List<HingeJoint2D> hingeJoints;
     [SerializeField] private List<Rigidbody2D> rigidbodies;
@@ -149,7 +148,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         gun.GetComponent<Rigidbody2D>().simulated = true;
         boxCollider.enabled = false;
-        cirCollider.enabled = false;
         body.simulated= false;
         animator.enabled= false;
         gun.transform.SetParent(null);
