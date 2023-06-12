@@ -37,9 +37,16 @@ public class LaunchObject : MonoBehaviour
         {
             Invoke("ResetTag", 2);
         }
+
         if (collision.gameObject.CompareTag("LaunchObject"))
         {
             collision.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        }
+
+        if (collision.gameObject.CompareTag("Enemy") && gameObject.CompareTag("LaunchObject"))
+        {
+            ExplosionForce ef = GameObject.FindObjectOfType<ExplosionForce>();
+            ef.doExplosion(transform.position);
         }
     }
 

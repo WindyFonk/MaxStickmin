@@ -139,9 +139,10 @@ public class EnemyBehavior : MonoBehaviour
         foreach (var rb in rigidbodies)
         {
             rb.simulated = true;
+            rb.isKinematic = false;
         }
         this.enabled= false;
-        Destroy(gameObject, 30f);
+        Destroy(gameObject, 5f);
     }
 
     private void DisableCollider()
